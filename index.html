@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="formData">
+        <div>
+            <label for="projects">Project Name </label>
+            <select id="projects" name="projects">
+                <option value="select">--Select--</option>
+                <option value="project1">Project 1</option>
+                <option value="project2">Project 2</option>
+                <option value="project3">Project 3</option>
+            </select>
+        </div>
+        <div>
+            <label for="tickets">Ticket Type</label>
+            <select id="tickets" name="tickets">
+                <option value="select">--Select--</option>
+                <option value="ticket1">Ticket 1</option>
+                <option value="ticket2">Ticket 2</option>
+                <option value="ticket3">Ticket 3</option>
+            </select>
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <textarea rows="3" cols="30" id="description" name="description"></textarea>
+        </div>
+        <div>
+            <label for="ticketAttachment">Attachment</label>
+            <input type="file" id="ticketAttachment" name="ticketAttachment" accept=".eml,.pdf,.doc,.txt,.zip,.jpg,.png,.jpeg,.mp4,.mp3,.aac" multiple>
+        </div>
+        <div>
+            <label>Suggestion</label>
+            <input type="checkbox" value="Marry with internet data" id="Marrywithinternetdata" name="Marrywithinternetdata">Marry With internet data</input>
+            <input type="checkbox" value="Only use internal data" id="Onlyuseinternaldata" name="Onlyuseinternaldata">Only use internal data</input>
+        </div>
+        <div>
+            <label for="solutionAttachment">Attachment</label>
+            <input type="file" id="solutionAttachment" name="solutionAttachment" accept=".eml,.pdf,.doc,.txt,.zip,.jpg,.png,.jpeg,.mp4,.mp3,.aac" multiple>
+        </div>
+        <div>
+            <input type="submit">Submit</button>
+        </div>
+    </form>
+    <div id="result"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('formData');
+  
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => {
+        console.log(value,key)
+        data[key] = value;
+      });
+
+      const jsonData = JSON.stringify(data);
+      document.getElementById("result").innerHTML = jsonData;
+      const blob = new Blob([jsonData], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+  
+    //   const a = document.createElement('a');
+    //   a.style.display = 'none';
+    //   a.href = url;
+    //   a.download = 'formData.json';
+    //   document.body.appendChild(a);
+    //   a.click();
+  
+    //   window.URL.revokeObjectURL(url);
+    //   document.body.removeChild(a);
+    });
+});
+    </script>
+</body>
+</html>
